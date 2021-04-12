@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="/style/base.css">
+    <link rel="stylesheet" href="style/layout.css">
+    <link rel="stylesheet" href="style/modules.css">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <header>
+            <h1>Book App </h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="./new">search book</a>
+            </nav>
+            
+               
+    
+            
+         </header>
+        
+     <main>
+        <form action="/searches/show" method="GET">
+            <div><input type="text" name="search" id="title" placeholder="title or author" ></div> 
+            <div><input type="radio" name="select" id="selectTitle" value="title"> 
+             <label for="selectTitle">Title</label></div> 
+           <div><input type="radio" name="select" id="selectAuthor" value="author"> 
+             <label for="selectAuthor">Author</label></div>  
+             <button id="search">Search the Google books API </button>
+         </form>
+     </main>
+     <footer>
+
+     </footer>
+   
+    
+</body>
+</html>
