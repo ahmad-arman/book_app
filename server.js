@@ -24,16 +24,16 @@ server.get('/searches/new' , (req,res)=>{
     res.render('./pages/searches/new');
 } );
 
-server.get('/searches/show' , myData);
+server.post('/searches' , myData);
 
 server.get('*' ,(req,res)=>{
-    res.render('pages/error' ,)
+    res.render('pages/error')
 } )
 
 function myData (req, res){
 
-    let title= req.query.search;
-    let select = req.query.select;
+    let title= req.body.search;
+    let select = req.body.select;
     let url = `https://www.googleapis.com/books/v1/volumes?q=+in${select}:${title}`;
 
     superagent.get(url)
@@ -48,10 +48,10 @@ function myData (req, res){
 }
 
 function BookData (getData) {
-    this.title =getData.volumeInfo.title;
-    this.author =getData.volumeInfo.authors;
-    this.image= getData.volumeInfo.imageLinks.smallThumbnail;
-    this.description= getData.volumeInfo.description;
+    this.title =(getData.volumeInfo.title) ? getData.volumeInfo.title : 'do not have data';
+    this.author =(getData.volumeInfo.authors) ? getData.volumeInfo.authors : 'do not have data';
+    this.image= (getData.volumeInfo.imageLinks.smallThumbnail) ? getData.volumeInfo.imageLinks.smallThumbnail :`https://i.imgur.com/J5LVHEL.jpg` ;
+    this.description= (getData.volumeInfo.description) ? getData.volumeInfo.description : 'do not have data' ;
 }
 
 
