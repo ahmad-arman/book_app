@@ -50,7 +50,7 @@ function myData (req, res){
 function BookData (getData) {
     this.title =(getData.volumeInfo.title) ? getData.volumeInfo.title : 'do not have data';
     this.author =(getData.volumeInfo.authors) ? getData.volumeInfo.authors : 'do not have data';
-    this.image= (getData.volumeInfo.imageLinks.smallThumbnail) ? getData.volumeInfo.imageLinks.smallThumbnail :`https://i.imgur.com/J5LVHEL.jpg` ;
+    this.image= (getData.volumeInfo.imageLinks) ? getData.volumeInfo.imageLinks.smallThumbnail :`https://i.imgur.com/J5LVHEL.jpg` ;
     this.description= (getData.volumeInfo.description) ? getData.volumeInfo.description : 'do not have data' ;
 }
 
