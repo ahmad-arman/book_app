@@ -49,12 +49,14 @@ button {
     height: auto;
     background-color:black;
 color: white;
-margin: 10px;
+margin-bottom: 10px;
 padding: 20px 20px;
+text-align: center;
+align-items: center;
    
 }
 img{
-    margin-left: 160px;
+    /* margin-left: 160px; */
     text-align: center;
 }
 h2 ,h3 {
