@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style/layout.css">
     <link rel="stylesheet" href="style/modules.css">
     <title>Document</title>
+     
 </head>
 <body>
     <header>
@@ -18,7 +19,18 @@
             <a href="#">Home</a>
             <a href="./searches/new">search book</a>
         </nav>
-        
+       <p>`you have <%= books.length %>`</p>
+        <% books.forEach(item => { %>
+            <div class="show">
+              <img src=" <%= item.image %>" alt="">
+              <h2> <%= item.title %>  </h1>
+              <h3> <%= item.author %>  </h2>
+              <form action="/books/<%=item.id %>">
+                <button >show detail </button>
+              </form>  
+              
+            </div>
+         <% }) %>
          
 
        
