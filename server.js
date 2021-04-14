@@ -11,7 +11,13 @@ const server = express();
 const pg = require('pg');
 
 
-const client = new pg.Client(process.env.DATABASE_URL);
+// const client = new pg.Client(process.env.DATABASE_URL);
+// const DATABASE_URL = process.env.DATABASE_URL;
+const client = new pg.Client( { connectionString: process.env.DATABASE_URL,
+  // ssl:{rejectUnauthorized: false
+  // }
+
+} );
 
 server.use(express.static('./public'));
 server.set('view engine','ejs');
