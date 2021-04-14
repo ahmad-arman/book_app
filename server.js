@@ -6,20 +6,24 @@ const express = require('express');
 
 const superagent=require('superagent');
 
+const methodOverride = require('method-override');
+
 const server = express();
 
 const pg = require('pg');
 
 
+
 // const client = new pg.Client(process.env.DATABASE_URL);
 // const DATABASE_URL = process.env.DATABASE_URL;
 const client = new pg.Client( { connectionString: process.env.DATABASE_URL,
-  ssl:{rejectUnauthorized: false
-  }
+  // ssl:{rejectUnauthorized: false
+  // }
 
 } );
 
 server.use(express.static('./public'));
+server.use(methodOverride('_method'));
 server.set('view engine','ejs');
 
 server.use(express.urlencoded({extended:true}));
@@ -49,8 +53,10 @@ server.get('/searches/new' , (req,res)=>{
 } );
 
 server.post('/searches' , myData);
-server.post('/books',addBookHandler )
+server.post('/books',addBookHandler );
 server.get('/books/:id' ,renderOneBook);
+server.put('/updateBook/:id',updateBookHandler);
+server.delete('/deleteBook/:id', deleteBookHandler);
 
 
 
@@ -89,14 +95,32 @@ function addBookHandler(req,res) {
       })
   }
 
-  function renderOneBook(req, res){
+function renderOneBook(req, res){
 let sql = `SELECT * FROM books WHERE id=$1;`;
 let saveValue = [req.params.id]
 client.query(sql, saveValue)
 .then (result =>{
   res.render('pages/books/detail' , {item:result.rows[0]});
+}) }
+
+function updateBookHandler(req,res){
+let {title,author,isbn,image,description} = req.body ;
+let sql =  `UPDATE books SET title=$1,author=$2,isbn=$3,image=$4,description=$5 WHERE id=$6;`;
+let saveUpdate = [title,author,isbn,image,description,req.params.id];
+client.query(sql,saveUpdate)
+.then(()=>{
+  res.redirect(`/books/${req.params.id}`)
 })
-  }
+}
+
+function deleteBookHandler(req,res){
+  let sql = `DELETE FROM books WHERE id=$1;`;
+  let deleteBook=[req.params.id];
+  client.query(sql,deleteBook)
+  .then(()=>{
+    res.redirect('/');
+  });
+}
 
 function BookData (getData) {
     this.title =(getData.volumeInfo.title) ? getData.volumeInfo.title : 'do not have data';

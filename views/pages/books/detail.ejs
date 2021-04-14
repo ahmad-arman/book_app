@@ -25,5 +25,45 @@
      <h3> ISBN: <%= item.isbn %>  </h2>             
      <h3> Description: <%= item.description %>  </h2>
     </div>
+
+
+    <button id='updateBtn'>Update</button>
+    <section id='updateForm'>
+        <h3>Update book From</h3>
+        
+
+     <form action="/updateBook/<%=item.id%>?_method=put" method="POST">
+            
+        <br>
+        <input type="text" name="image" value=" <%= item.image %>">
+
+      <br>
+        <input type="text" name="title" value=" <%= item.title %>">
+       <br>
+        <input type="text" name="author" value=" <%= item.author %>">
+        
+       <br>
+        <input type="text" name="isbn" value=" <%= item.isbn %>">
+         <br>
+        <textarea name="description" cols="30" rows="10"><%= item.description  %></textarea>
+    
+            
+        <br>
+       
+        <button >Update Book </a></button>
+        
+
+           
+    </form>
+    
+    </section>
+
+    <form action="/deleteBook/<%= item.id %>?_method=delete" method="POST">
+        <button>Delete Book</button>
+    </form>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/app.js"></script>
 </body>
 </html>
